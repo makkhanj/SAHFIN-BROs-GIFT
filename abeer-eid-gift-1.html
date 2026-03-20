@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eid Mubarak — Abeer Khan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+Bengali:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson: #8B0000;
+    --crimson-mid: #C0392B;
+    --crimson-light: #E74C3C;
+    --gold: #D4AF37;
+    --gold-light: #F4D03F;
+    --gold-pale: #FAE5A0;
+    --ivory: #FDF6E3;
+    --dark: #1A0A00;
+    --shadow-gold: rgba(212,175,55,0.4);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0D0000;
+    font-family: 'Cormorant Garamond', serif;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    box-shadow: 0 0 20px var(--gold-light);
+  }
+
+  /* PAGE LAYOUT */
+  .page {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 40px;
+  }
+
+  /* Gold particle canvas */
+  #particles {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ======================== PAGE 1 — COVER ======================== */
+  .page-1 {
+    background: radial-gradient(ellipse at 50% 40%, #3D0000 0%, #1A0000 50%, #0A0000 100%);
+    min-height: 100vh;
+  }
+
+  .cover-border {
+    position: absolute;
+    inset: 20px;
+    border: 2px solid var(--gold);
+    pointer-events: none;
+    opacity: 0.6;
+  }
+  .cover-border::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--gold);
+    opacity: 0.4;
+  }
+
+  .cover-ornament-top {
+    font-size: 2.5rem;
+    color: var(--gold);
+    letter-spacing: 0.5rem;
+    animation: shimmer 3s ease-in-out infinite;
+    text-shadow: 0 0 30px var(--gold-light);
+    margin-bottom: 10px;
+  }
+
+  .eid-arabic {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--gold-pale) 0%, var(--gold) 40%, var(--crimson-light) 70%, var(--gold-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    line-height: 1.1;
+    filter: drop-shadow(0 0 40px rgba(212,175,55,0.5));
+    animation: titleGlow 4s ease-in-out infinite;
+    letter-spacing: 0.05em;
+  }
+
+  .eid-sub {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1rem, 3vw, 1.8rem);
+    color: var(--gold);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-top: 10px;
+    opacity: 0.85;
+    text-shadow: 0 0 20px var(--shadow-gold);
+  }
+
+  .cover-divider {
+    width: 300px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--crimson-light), var(--gold), transparent);
+    margin: 30px auto;
+    position: relative;
+  }
+  .cover-divider::before, .cover-divider::after {
+    content: '✦';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+  .cover-divider::before { left: -20px; }
+  .cover-divider::after { right: -20px; }
+
+  .cover-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    color: var(--ivory);
+    letter-spacing: 0.15em;
+    text-shadow: 0 0 40px var(--gold), 0 0 80px var(--crimson);
+    animation: nameFloat 5s ease-in-out infinite;
+    font-weight: 700;
+  }
+
+  .cover-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--gold-pale);
+    font-style: italic;
+    opacity: 0.8;
+    margin-top: 15px;
+    letter-spacing: 0.1em;
+  }
+
+  .moon-deco {
+    font-size: 5rem;
+    position: absolute;
+    top: 60px; right: 80px;
+    animation: moonSway 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px gold);
+    opacity: 0.7;
+  }
+
+  .star-deco {
+    font-size: 2rem;
+    position: absolute;
+    color: var(--gold-light);
+    animation: twinkle 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px var(--gold));
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--gold);
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    animation: fadeUpDown 2s ease-in-out infinite;
+  }
+
+  /* ======================== PAGE 2 — BISMILLAH / OPENING ======================== */
+  .page-2 {
+    background: linear-gradient(160deg, #1C0000 0%, #2D0A00 50%, #1C0000 100%);
+    position: relative;
+  }
+
+  .arabic-text {
+    font-size: clamp(2rem, 6vw, 4rem);
+    color: var(--gold);
+    text-align: center;
+    text-shadow: 0 0 30px var(--shadow-gold);
+    letter-spacing: 0.05em;
+    line-height: 1.8;
+    font-family: serif;
+    margin-bottom: 20px;
+  }
+
+  .transliteration {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--gold-pale);
+    font-style: italic;
+    letter-spacing: 0.15em;
+    opacity: 0.8;
+    margin-bottom: 40px;
+  }
+
+  .page-poem {
+    max-width: 650px;
+    text-align: center;
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: var(--ivory);
+    line-height: 2.2;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeInUp 1.5s ease forwards 0.5s;
+  }
+
+  /* ======================== PAGE 3 — WHO IS ABEER ======================== */
+  .page-3 {
+    background: radial-gradient(ellipse at 30% 50%, #2A0500 0%, #150000 100%);
+  }
+
+  .page-label {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 20px;
+  }
+
+  .page-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    background: linear-gradient(135deg, var(--gold-pale), var(--gold), var(--crimson-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    margin-bottom: 15px;
+    line-height: 1.2;
+  }
+
+  .gold-line {
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 15px auto 40px;
+  }
+
+  .traits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 700px;
+    width: 100%;
+  }
+
+  .trait-card {
+    background: linear-gradient(135deg, rgba(139,0,0,0.15), rgba(212,175,55,0.08));
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 4px;
+    padding: 25px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .trait-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    box-shadow: 0 10px 40px rgba(212,175,55,0.15);
+  }
+  .trait-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--crimson), var(--gold));
+  }
+
+  .trait-icon { font-size: 2rem; margin-bottom: 10px; }
+  .trait-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+  }
+  .trait-desc {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 0.9rem;
+    color: var(--ivory);
+    opacity: 0.85;
+    line-height: 1.7;
+  }
+
+  /* ======================== PAGE 4 — MEMORY / FRIENDSHIP ======================== */
+  .page-4 {
+    background: linear-gradient(180deg, #150000 0%, #250800 50%, #150000 100%);
+  }
+
+  .memory-box {
+    max-width: 700px;
+    background: linear-gradient(135deg, rgba(139,0,0,0.12), rgba(212,175,55,0.06));
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 8px;
+    padding: 50px 45px;
+    position: relative;
+    text-align: center;
+  }
+  .memory-box::before, .memory-box::after {
+    content: '❝';
+    position: absolute;
+    font-size: 5rem;
+    color: var(--gold);
+    opacity: 0.15;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .memory-box::before { top: 10px; left: 20px; }
+  .memory-box::after { content: '❞'; bottom: 10px; right: 20px; }
+
+  .memory-text {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--ivory);
+    line-height: 2.3;
+    font-weight: 300;
+    opacity: 0.9;
+  }
+
+  .memory-signature {
+    margin-top: 30px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    font-style: italic;
+    letter-spacing: 0.1em;
+  }
+
+  /* ======================== PAGE 5 — EID SIGNIFICANCE ======================== */
+  .page-5 {
+    background: radial-gradient(ellipse at 70% 30%, #2A0500 0%, #0D0000 100%);
+  }
+
+  .eid-info-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 680px;
+    width: 100%;
+  }
+
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(139,0,0,0.1);
+    border-left: 3px solid var(--gold);
+  }
+
+  .info-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2.5rem;
+    color: var(--crimson-mid);
+    opacity: 0.5;
+    line-height: 1;
+    min-width: 50px;
+  }
+
+  .info-content-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.8rem;
+    color: var(--gold);
+    letter-spacing: 0.25em;
+    margin-bottom: 8px;
+  }
+
+  .info-content-text {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 1rem;
+    color: var(--ivory);
+    line-height: 1.9;
+    opacity: 0.85;
+  }
+
+  /* ======================== PAGE 6 — POEM FOR ABEER ======================== */
+  .page-6 {
+    background: linear-gradient(200deg, #1A0000 0%, #2D1000 60%, #1A0000 100%);
+  }
+
+  .poem-container {
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+  }
+
+  .poem-ornament {
+    font-size: 3rem;
+    color: var(--gold);
+    opacity: 0.4;
+    margin-bottom: 20px;
+    letter-spacing: 1rem;
+  }
+
+  .poem-line {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: clamp(1.1rem, 2.8vw, 1.4rem);
+    color: var(--ivory);
+    line-height: 2.5;
+    font-weight: 300;
+  }
+
+  .poem-line.gold-line-text {
+    color: var(--gold-pale);
+    font-weight: 600;
+    font-style: italic;
+    text-shadow: 0 0 20px rgba(212,175,55,0.3);
+  }
+
+  /* ======================== PAGE 7 — DUA / PRAYER ======================== */
+  .page-7 {
+    background: radial-gradient(circle at 50% 50%, #200000 0%, #0A0000 100%);
+  }
+
+  .dua-container {
+    max-width: 680px;
+    text-align: center;
+  }
+
+  .dua-ornament-wrap {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+    justify-content: center;
+  }
+  .dua-ornament-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+  .dua-ornament-line.rev { background: linear-gradient(90deg, var(--gold), transparent); }
+
+  .dua-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 30px;
+    text-align: left;
+  }
+
+  .dua-item {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    padding: 18px 22px;
+    background: linear-gradient(90deg, rgba(139,0,0,0.15) 0%, rgba(212,175,55,0.05) 100%);
+    border-radius: 4px;
+    border-right: 3px solid var(--crimson-mid);
+  }
+
+  .dua-bullet {
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .dua-text {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+    color: var(--ivory);
+    line-height: 1.9;
+    opacity: 0.9;
+  }
+
+  /* ======================== PAGE 8 — FINAL WISH ======================== */
+  .page-8 {
+    background: radial-gradient(ellipse at 50% 50%, #3D0000 0%, #1A0000 40%, #080000 100%);
+  }
+
+  .final-wrap {
+    text-align: center;
+    max-width: 700px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .final-eid-text {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--gold-pale) 0%, var(--gold) 30%, #FF6B35 60%, var(--gold-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    filter: drop-shadow(0 0 60px rgba(212,175,55,0.6));
+    animation: titleGlow 3s ease-in-out infinite;
+  }
+
+  .final-message {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--ivory);
+    line-height: 2.3;
+    opacity: 0.88;
+    margin: 35px 0;
+    font-weight: 300;
+  }
+
+  .final-signature-box {
+    display: inline-block;
+    padding: 20px 50px;
+    border: 1px solid var(--gold);
+    position: relative;
+    margin-top: 10px;
+  }
+  .final-signature-box::before {
+    content: '✦';
+    position: absolute;
+    top: -10px; left: 50%;
+    transform: translateX(-50%);
+    background: #1A0000;
+    padding: 0 10px;
+    color: var(--gold);
+    font-size: 1rem;
+  }
+
+  .final-from {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--gold);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .final-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: var(--gold-pale);
+    margin-top: 5px;
+    text-shadow: 0 0 20px var(--shadow-gold);
+  }
+
+  .firework {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: fireworkBurst 2s ease-out infinite;
+    pointer-events: none;
+  }
+
+  /* ===================== SECTION DIVIDERS ===================== */
+  .section-sep {
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(180deg, transparent, rgba(139,0,0,0.3), transparent);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .section-sep::after {
+    content: '✦ ✦ ✦';
+    color: var(--gold);
+    letter-spacing: 1.5rem;
+    font-size: 0.7rem;
+    opacity: 0.5;
+  }
+
+  /* ===================== ANIMATIONS ===================== */
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.8; text-shadow: 0 0 20px var(--gold); }
+    50% { opacity: 1; text-shadow: 0 0 40px var(--gold-light), 0 0 80px var(--gold); }
+  }
+
+  @keyframes titleGlow {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(212,175,55,0.4)); }
+    50% { filter: drop-shadow(0 0 60px rgba(212,175,55,0.7)) drop-shadow(0 0 100px rgba(139,0,0,0.4)); }
+  }
+
+  @keyframes nameFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes moonSway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  @keyframes fadeUpDown {
+    0%, 100% { opacity: 0.4; transform: translateY(0); }
+    50% { opacity: 0.8; transform: translateY(-8px); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fireworkBurst {
+    0% { transform: scale(0); opacity: 1; }
+    60% { opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+  }
+
+  @keyframes particleFall {
+    0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Intersection Observer fade-in */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #0A0000; }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+  /* Nav dots */
+  .nav-dots {
+    position: fixed;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 100;
+  }
+  .nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(212,175,55,0.3);
+    border: 1px solid rgba(212,175,55,0.5);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .nav-dot.active {
+    background: var(--gold);
+    box-shadow: 0 0 10px var(--gold);
+    transform: scale(1.3);
+  }
+
+  /* Page number */
+  .page-num {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.65rem;
+    color: var(--gold);
+    opacity: 0.4;
+    letter-spacing: 0.3em;
+  }
+
+  /* Corner deco */
+  .corner-deco {
+    position: absolute;
+    width: 40px; height: 40px;
+    border-color: var(--gold);
+    border-style: solid;
+    opacity: 0.3;
+  }
+  .corner-tl { top: 25px; left: 25px; border-width: 2px 0 0 2px; }
+  .corner-tr { top: 25px; right: 25px; border-width: 2px 2px 0 0; }
+  .corner-bl { bottom: 25px; left: 25px; border-width: 0 0 2px 2px; }
+  .corner-br { bottom: 25px; right: 25px; border-width: 0 2px 2px 0; }
+
+  @media (max-width: 600px) {
+    .traits-grid { grid-template-columns: 1fr; }
+    .memory-box { padding: 35px 25px; }
+    .moon-deco { display: none; }
+    .nav-dots { right: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<canvas id="particles"></canvas>
+
+<!-- Navigation dots -->
+<div class="nav-dots" id="navDots">
+  <div class="nav-dot active" onclick="scrollToPage(0)" title="Cover"></div>
+  <div class="nav-dot" onclick="scrollToPage(1)" title="Bismillah"></div>
+  <div class="nav-dot" onclick="scrollToPage(2)" title="Abeer"></div>
+  <div class="nav-dot" onclick="scrollToPage(3)" title="Friendship"></div>
+  <div class="nav-dot" onclick="scrollToPage(4)" title="Eid"></div>
+  <div class="nav-dot" onclick="scrollToPage(5)" title="Poem"></div>
+  <div class="nav-dot" onclick="scrollToPage(6)" title="Dua"></div>
+  <div class="nav-dot" onclick="scrollToPage(7)" title="Wish"></div>
+</div>
+
+<!-- ===== PAGE 1: COVER ===== -->
+<section class="page page-1" id="page-0">
+  <div class="cover-border"></div>
+  <div class="corner-deco corner-tl"></div>
+  <div class="corner-deco corner-tr"></div>
+  <div class="corner-deco corner-bl"></div>
+  <div class="corner-deco corner-br"></div>
+
+  <span class="moon-deco">🌙</span>
+  <span class="star-deco" style="top:15%; left:10%; animation-delay:0.2s; font-size:1rem;">✦</span>
+  <span class="star-deco" style="top:25%; left:85%; animation-delay:0.8s; font-size:0.8rem;">✦</span>
+  <span class="star-deco" style="top:70%; left:8%; animation-delay:1.2s; font-size:1.2rem;">★</span>
+  <span class="star-deco" style="top:80%; left:88%; animation-delay:0.4s;">✦</span>
+  <span class="star-deco" style="top:40%; left:5%; animation-delay:1.5s; font-size:0.7rem;">✦</span>
+  <span class="star-deco" style="top:55%; left:92%; animation-delay:0.9s; font-size:0.9rem;">✦</span>
+
+  <div style="position:relative; z-index:2; text-align:center; display:flex; flex-direction:column; align-items:center;">
+    <div class="cover-ornament-top">☪</div>
+    <h1 class="eid-arabic">Eid Mubarak</h1>
+    <div class="eid-sub">ঈদ উল ফিতর ১৪৪৭</div>
+    <div class="cover-divider"></div>
+    <div class="cover-name">Abeer Khan</div>
+    <div class="cover-subtitle">Abeer Khan — ঈদের শুভেচ্ছা জানাতে এই উপহার</div>
+    <div style="margin-top: 50px; color: var(--gold); opacity:0.5; font-size:2rem; letter-spacing:1.5rem;">✦ ✦ ✦</div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>scroll to explore</span>
+    <span>↓</span>
+  </div>
+  <div class="page-num">01 / 08</div>
+</section>
+
+<div class="section-sep"></div>
+
+<!-- ===== PAGE 2: OPENING ===== -->
+<section class="page page-2" id="page-1">
+  <div class="corner-deco corner-tl"></div>
+  <div class="corner-deco corner-tr"></div>
+  <div class="corner-deco corner-bl"></div>
+  <div class="corner-deco corner-br"></div>
+
+  <div style="position:relative; z-index:2; text-align:center; display:flex; flex-direction:column; align-items:center;">
+    <div class="page-label reveal">In the name of</div>
+    <div class="arabic-text reveal" style="transition-delay:0.2s;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <div class="transliteration reveal" style="transition-delay:0.3s;">Bismillah ir-Rahman ir-Rahim</div>
+    <div class="gold-line reveal" style="transition-delay:0.4s;"></div>
+
+    <div class="page-poem reveal" style="transition-delay:0.5s;">
+      রমজানের মাস শেষ হলো, এলো ঈদের দিন,<br>
+      চাঁদের আলোয় শুরু হোক নতুন একটা সকাল।<br>
+      রোজার ত্যাগ, ইবাদতের পরিশুদ্ধ সমাপ্তি —<br>
+      ঈদ মানে আনন্দ, ঈদ মানে রহমতের ডাক।<br><br>
+      এই ঈদে Abeer Khan-কে জানাই<br>
+      আন্তরিক শুভেচ্ছা ও দোয়া।
+    </div>
+  </div>
+  <div class="page-num">02 / 08</div>
+</section>
+
+<div class="section-sep"></div>
+
+<!-- ===== PAGE 3: WHO IS ABEER ===== -->
+<section class="page page-3" id="page-2">
+  <div class="corner-deco corner-tl"></div>
+  <div class="corner-deco corner-tr"></div>
+  <div class="corner-deco corner-bl"></div>
+  <div class="corner-deco corner-br"></div>
+
+  <div style="position:relative; z-index:2; text-align:center; display:flex; flex-direction:column; align-items:center; width:100%;">
+    <div class="page-label reveal">যেভাবে চিনি</div>
+    <h2 class="page-title reveal" style="transition-delay:0.15s;">Abeer Khan — একটি পরিচয়</h2>
+    <div class="gold-line reveal" style="transition-delay:0.25s;"></div>
+
+    <div class="traits-grid reveal" style="transition-delay:0.35s;">
+      <div class="trait-card">
+        <div class="trait-icon">🔥</div>
+        <div class="trait-title">তেজী স্বভাব</div>
+        <div class="trait-desc">যা করেন, সেটায় পুরোপুরি মনোযোগ দেন — এই একাগ্রতাই বড় গুণ।</div>
+      </div>
+      <div class="trait-card">
+        <div class="trait-icon">🤝</div>
+        <div class="trait-title">বিশ্বস্ত বন্ধু</div>
+        <div class="trait-desc">বন্ধুর পাশে থাকেন — এটা সবাই পারে না, কিন্তু Abeer Khan পারেন।</div>
+      </div>
+      <div class="trait-card">
+        <div class="trait-icon">💎</div>
+        <div class="trait-title">মূল্যবান মন</div>
+        <div class="trait-desc">চুপ থাকলেও বোঝেন — এই বিচক্ষণতা অনেক মূল্যবান।</div>
+      </div>
+      <div class="trait-card">
+        <div class="trait-icon">🌙</div>
+        <div class="trait-title">নিজস্ব আলো</div>
+        <div class="trait-desc">নিজের মতো চলেন — অন্যের পেছনে না গিয়ে নিজের পরিচয় ধরে রাখেন।</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-num">03 / 08</div>
+</section>
+
+<div class="section-sep"></div>
+
+<!-- ===== PAGE 4: FRIENDSHIP ===== -->
+<section class="page page-4" id="page-3">
+  <div class="corner-deco corner-tl"></div>
+  <div class="corner-deco corner-tr"></div>
+  <div class="corner-deco corner-bl"></div>
+  <div class="corner-deco corner-br"></div>
+
+  <div style="position:relative; z-index:2; text-align:center; display:flex; flex-direction:column; align-items:center; width:100%;">
+    <div class="page-label reveal">দোস্তি</div>
+    <h2 class="page-title reveal" style="transition-delay:0.15s;">বন্ধুত্ব</h2>
+    <div class="gold-line reveal" style="transition-delay:0.25s;"></div>
+
+    <div class="memory-box reveal" style="transition-delay:0.4s;">
+      <div class="memory-text">
+        ভালো বন্ধু পাওয়া সহজ না।<br>
+        যে বন্ধু কাজের সময় পাশে থাকে,<br>
+        বিনা কারণে সরে যায় না —<br>
+        সেই বন্ধুই আসল।<br><br>
+        Abeer Khan, এই ঈদে<br>
+        বন্ধু হিসেবে শুভেচ্ছা জানাই।<br>
+        আল্লাহ ভালো রাখুন।
+      </div>
+      <div class="memory-signature">— একজন বন্ধুর পক্ষ থেকে</div>
+    </div>
+  </div>
+  <div class="page-num">04 / 08</div>
+</section>
+
+<div class="section-sep"></div>
+
+<!-- ===== PAGE 5: EID SIGNIFICANCE ===== -->
+<section class="page page-5" id="page-4">
+  <div class="corner-deco corner-tl"></div>
+  <div class="corner-deco corner-tr"></div>
+  <div class="corner-deco corner-bl"></div>
+  <div class="corner-deco corner-br"></div>
+
+  <div style="position:relative; z-index:2; text-align:center; display:flex; flex-direction:column; align-items:center; width:100%;">
+    <div class="page-label reveal">কেন এই দিন এত বিশেষ</div>
+    <h2 class="page-title reveal" style="transition-delay:0.15s;">ঈদ উল ফিতর — অর্থ ও মাহাত্ম্য</h2>
+    <div class="gold-line reveal" style="transition-delay:0.25s;"></div>
+
+    <div class="eid-info-wrap reveal" style="transition-delay:0.4s;">
+      <div class="info-row">
+        <div class="info-num">০১</div>
+        <div>
+          <div class="info-content-title">সংযমের পুরস্কার</div>
+          <div class="info-content-text">পুরো রমজান মাস রোজা রেখে, সংযম পালন করে যে পরিশুদ্ধি আসে — ঈদ হলো তার আনন্দময় উদযাপন। এটা শুধু খাওয়ার উৎসব না, এটা আত্মার বিজয়।</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-num">০২</div>
+        <div>
+          <div class="info-content-title">একতার দিন</div>
+          <div class="info-content-text">ঈদের দিনে ধনী-গরিব, ছোট-বড় সবাই একসাথে নামাজে দাঁড়ায়। এই একতার সৌন্দর্যই ঈদকে অন্য সব উৎসব থেকে আলাদা করে।</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-num">০৩</div>
+        <div>
+          <div class="info-content-title">ভালোবাসার প্রকাশ</div>
+          <div class="info-content-text">ঈদে মানুষ মানুষের কাছে যায়, ক্ষমা চায়, কোলাকুলি করে। এই দিনটা মনে করিয়ে দেয় — সম্পর্কই আসল সম্পদ।</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-num">05 / 08</div>
+</section>
+
+<div class="section-sep"></div>
+
+<!-- ===== PAGE 6: POEM ===== -->
+<section class="page page-6" id="page-5">
+  <div class="corner-deco corner-tl"></div>
+  <div class="corner-deco corner-tr"></div>
+  <div class="corner-deco corner-bl"></div>
+  <div class="corner-deco corner-br"></div>
+
+  <div style="position:relative; z-index:2; text-align:center; display:flex; flex-direction:column; align-items:center; width:100%;">
+    <div class="page-label reveal">ঈদের উপলক্ষে</div>
+    <h2 class="page-title reveal" style="transition-delay:0.15s;">একটি কবিতা</h2>
+    <div class="gold-line reveal" style="transition-delay:0.25s;"></div>
+
+    <div class="poem-container reveal" style="transition-delay:0.4s;">
+      <div class="poem-ornament">✦ ✦ ✦</div>
+      <div class="poem-line">চাঁদ উঠেছে আকাশে আজ,</div>
+      <div class="poem-line">ঈদের খুশি চারদিকে।</div>
+      <div class="poem-line">বন্ধুদের শুভেচ্ছা জানাই,</div>
+      <div class="poem-line gold-line-text">Abeer Khan — তোমাকেও।</div>
+      <br>
+      <div class="poem-line">রমজানের ত্যাগ শেষ হলো,</div>
+      <div class="poem-line">আজকে আনন্দের বেলা।</div>
+      <div class="poem-line">দোয়া রইলো মনে মনে —</div>
+      <div class="poem-line gold-line-text">ভালো থাকুন, সুস্থ থাকুন।</div>
+      <br>
+      <div class="poem-line">নতুন বছর নতুন সুযোগ,</div>
+      <div class="poem-line">আল্লাহ রাখুন আপনাকে।</div>
+      <div class="poem-line">Abeer Khan — ঈদ মুবারক,</div>
+      <div class="poem-line gold-line-text">এটুকুই বলার ছিল।</div>
+      <div class="poem-ornament" style="margin-top:20px;">✦ ✦ ✦</div>
+    </div>
+  </div>
+  <div class="page-num">06 / 08</div>
+</section>
+
+<div class="section-sep"></div>
+
+<!-- ===== PAGE 7: DUA ===== -->
+<section class="page page-7" id="page-6">
+  <div class="corner-deco corner-tl"></div>
+  <div class="corner-deco corner-tr"></div>
+  <div class="corner-deco corner-bl"></div>
+  <div class="corner-deco corner-br"></div>
+
+  <div style="position:relative; z-index:2; text-align:center; display:flex; flex-direction:column; align-items:center; width:100%;">
+    <div class="page-label reveal">আল্লাহর কাছে চাওয়া</div>
+    <h2 class="page-title reveal" style="transition-delay:0.15s;">আপনার জন্য দোয়া</h2>
+
+    <div class="dua-ornament-wrap reveal" style="transition-delay:0.25s;">
+      <div class="dua-ornament-line"></div>
+      <span style="color:var(--gold); font-size:1.2rem;">🤲</span>
+      <div class="dua-ornament-line rev"></div>
+    </div>
+
+    <div class="dua-list reveal" style="transition-delay:0.4s; max-width:680px; width:100%;">
+      <div class="dua-item">
+        <div class="dua-bullet">✦</div>
+        <div class="dua-text">আল্লাহ আপনাকে সুস্বাস্থ্য দিন — শরীরে যেন কোনো কষ্ট না থাকে, মন যেন সবসময় হালকা থাকে।</div>
+      </div>
+      <div class="dua-item">
+        <div class="dua-bullet">✦</div>
+        <div class="dua-text">আপনার স্বপ্নগুলো পূরণ হোক — যা চান, যা চাইছেন, সব যেন সুন্দরভাবে পথ পায়।</div>
+      </div>
+      <div class="dua-item">
+        <div class="dua-bullet">✦</div>
+        <div class="dua-text">আপনার পরিবার ভালো থাকুক — তাদের হাসি যেন সবসময় আপনার শক্তির উৎস হয়।</div>
+      </div>
+      <div class="dua-item">
+        <div class="dua-bullet">✦</div>
+        <div class="dua-text">যারা আপনার ক্ষতি চায়, আল্লাহ তাদের থেকে আপনাকে হেফাজত করুন — আপনি যেন নিরাপদ থাকেন।</div>
+      </div>
+      <div class="dua-item">
+        <div class="dua-bullet">✦</div>
+        <div class="dua-text">এই ঈদ আপনার জীবনে নতুন কিছু নিয়ে আসুক — নতুন সুযোগ, নতুন আনন্দ, নতুন শুরু।</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-num">07 / 08</div>
+</section>
+
+<div class="section-sep"></div>
+
+<!-- ===== PAGE 8: FINAL WISH ===== -->
+<section class="page page-8" id="page-7">
+  <div class="corner-deco corner-tl"></div>
+  <div class="corner-deco corner-tr"></div>
+  <div class="corner-deco corner-bl"></div>
+  <div class="corner-deco corner-br"></div>
+
+  <!-- Fireworks -->
+  <span class="firework" style="top:15%; left:15%; animation-delay:0s;">🎆</span>
+  <span class="firework" style="top:20%; right:15%; animation-delay:0.7s;">✨</span>
+  <span class="firework" style="bottom:25%; left:20%; animation-delay:1.2s;">🌟</span>
+  <span class="firework" style="bottom:30%; right:20%; animation-delay:0.4s;">💥</span>
+  <span class="firework" style="top:50%; left:5%; animation-delay:1.8s;">⭐</span>
+  <span class="firework" style="top:50%; right:5%; animation-delay:0.9s;">✨</span>
+
+  <div class="final-wrap reveal" style="position:relative; z-index:2;">
+    <div class="final-eid-text">ঈদ মুবারক</div>
+    <div style="font-family:'Cinzel Decorative',serif; font-size:1.1rem; color:var(--gold); letter-spacing:0.3em; opacity:0.7; margin-top:5px;">EID AL-FITR 2025</div>
+
+    <div class="final-message">
+      Abeer Khan,<br>
+      এই ছোট্ট উপহার পাঠানো হলো<br>
+      ঈদের শুভেচ্ছা জানাতে।<br><br>
+      আল্লাহ ভালো রাখুন,<br>
+      সুস্থ রাখুন, সফল করুন।<br>
+      ঈদ আনন্দে কাটুক।<br><br>
+      <span style="color:var(--gold-pale); font-style:italic;">তাকাব্বালাল্লাহু মিন্না ওয়া মিনকুম।</span>
+    </div>
+
+    <div class="final-signature-box">
+      <div class="final-from">Eid Greetings from a friend</div>
+      <div class="final-name">একজন বন্ধু 🤝</div>
+    </div>
+
+    <div style="margin-top: 50px; color: var(--gold); opacity:0.4; font-size:1.5rem; letter-spacing:2rem; animation: shimmer 3s infinite;">☪ ✦ ☪</div>
+  </div>
+  <div class="page-num">08 / 08</div>
+</section>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX - 6 + 'px';
+  cursor.style.top = e.clientY - 6 + 'px';
+});
+
+// Particle canvas
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+const particles = [];
+function createParticle() {
+  return {
+    x: Math.random() * canvas.width,
+    y: -10,
+    size: Math.random() * 3 + 1,
+    speed: Math.random() * 1 + 0.3,
+    opacity: Math.random() * 0.6 + 0.2,
+    color: Math.random() > 0.5 ? '#D4AF37' : '#8B0000',
+    rotation: Math.random() * 360,
+    rotationSpeed: (Math.random() - 0.5) * 2
+  };
+}
+
+for (let i = 0; i < 60; i++) {
+  const p = createParticle();
+  p.y = Math.random() * canvas.height;
+  particles.push(p);
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach((p, i) => {
+    ctx.save();
+    ctx.globalAlpha = p.opacity * 0.5;
+    ctx.fillStyle = p.color;
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rotation * Math.PI / 180);
+    ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+    ctx.restore();
+    p.y += p.speed;
+    p.rotation += p.rotationSpeed;
+    if (p.y > canvas.height + 10) {
+      particles[i] = createParticle();
+    }
+  });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// Intersection Observer for reveal
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.15 });
+revealEls.forEach(el => observer.observe(el));
+
+// Nav dots
+const pages = document.querySelectorAll('section.page');
+const dots = document.querySelectorAll('.nav-dot');
+const pageObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = Array.from(pages).indexOf(e.target);
+      dots.forEach(d => d.classList.remove('active'));
+      if (dots[idx]) dots[idx].classList.add('active');
+    }
+  });
+}, { threshold: 0.5 });
+pages.forEach(p => pageObserver.observe(p));
+
+function scrollToPage(idx) {
+  pages[idx].scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
